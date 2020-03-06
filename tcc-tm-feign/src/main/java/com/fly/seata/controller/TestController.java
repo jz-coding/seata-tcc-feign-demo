@@ -5,9 +5,10 @@ import com.fly.seata.feign.api.RmOneApi;
 import com.fly.seata.feign.api.RmTwoApi;
 import io.seata.spring.annotation.GlobalTransactional;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.RandomUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
+    private final static Logger LOGGER = LoggerFactory.getLogger(TestController.class);
+
   @Autowired
   private RmOneApi rmOneApi;
 
@@ -32,8 +35,8 @@ public class TestController {
   public String test(HttpServletRequest request,@RequestBody OrderDTO orderDTO){
       String orderNo = Long.valueOf(RandomUtils.nextLong()).toString();
       orderDTO.setOrderNo(orderNo);
-      rmOneApi.createOrder(orderDTO);
-
+      String result = rmOneApi.createOrder(orderDTO);
+      LOGGER.info("create order {}",result);
       String type = request.getHeader("type");
       if(StringUtils.isNotEmpty(type) && type.equalsIgnoreCase("hot")){
           //更新操作-热点数据测试
