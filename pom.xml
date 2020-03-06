@@ -63,7 +63,7 @@
       <dependency>
         <groupId>io.seata</groupId>
         <artifactId>seata-all</artifactId>
-        <version>0.9.0</version>
+        <version>${seata.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
