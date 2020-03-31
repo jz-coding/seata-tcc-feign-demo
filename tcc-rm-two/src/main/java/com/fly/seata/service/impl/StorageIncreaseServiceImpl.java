@@ -28,8 +28,7 @@ public class StorageIncreaseServiceImpl implements StorageIncreaseService {
         Storage storage = new Storage();
         storage.setProductId(1000L);
         storage.setUsed(0);
-//        storageDao.insert(storage);
-        Long storageId = storage.getId();
+        storageDao.insert(storage);
     }
 
     @Override

@@ -30,7 +30,7 @@ public class TccActionOneImpl implements TccActionOne {
     }
     String xid = actionContext.getXid();
     LOGGER.info("TccActionOne prepare, xid:" + xid);
-//    orderDao.insert(order);
+    orderDao.insert(order);
     return true;
   }
 
@@ -45,7 +45,7 @@ public class TccActionOneImpl implements TccActionOne {
   public boolean rollback(BusinessActionContext actionContext) {
     String xid = actionContext.getXid();
     String orderNo = ((JSONObject) actionContext.getActionContext("order")).getString("orderNo");
-//    orderDao.delete(orderNo);
+    orderDao.delete(orderNo);
     LOGGER.info("TccActionOne rollback, xid:" + xid);
     return true;
   }
